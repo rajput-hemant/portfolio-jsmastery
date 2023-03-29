@@ -40,7 +40,12 @@ export const navLinks = [
   },
 ];
 
-const services = [
+export type Service = {
+  title: string;
+  icon: string;
+};
+
+export const services = [
   {
     title: "Web Developer",
     icon: web,
@@ -59,7 +64,12 @@ const services = [
   },
 ];
 
-const technologies = [
+export type Technologie = {
+  name: string;
+  icon: string;
+};
+
+export const technologies = [
   {
     name: "HTML 5",
     icon: html,
@@ -114,7 +124,16 @@ const technologies = [
   },
 ];
 
-const experiences = [
+export type Experience = {
+  title: string;
+  company_name: string;
+  icon: string;
+  iconBg: string;
+  date: string;
+  points: string[];
+};
+
+export const experiences = [
   {
     title: "React.js Developer",
     company_name: "Starbucks",
@@ -169,7 +188,15 @@ const experiences = [
   },
 ];
 
-const testimonials = [
+export type Testimonial = {
+  testimonial: string;
+  name: string;
+  designation: string;
+  company: string;
+  image: string;
+};
+
+export const testimonials = [
   {
     testimonial:
       "I thought it was impossible to make a website as beautiful as our product, but Rick proved me wrong.",
@@ -196,7 +223,18 @@ const testimonials = [
   },
 ];
 
-const projects = [
+export type Project = {
+  name: string;
+  description: string;
+  tags: {
+    name: string;
+    color: string;
+  }[];
+  image: string;
+  source_code_link: string;
+};
+
+export const projects = [
   {
     name: "Car Rent",
     description:
@@ -261,5 +299,3 @@ const projects = [
     source_code_link: "https://github.com/",
   },
 ];
-
-export { services, technologies, experiences, testimonials, projects };
