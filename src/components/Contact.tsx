@@ -7,6 +7,10 @@ import { styles } from "../styles";
 import { slideIn } from "../utils/motion";
 import { EarthCanvas } from "./canvas";
 
+const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [form, setForm] = useState({
@@ -18,9 +22,38 @@ const Contact = () => {
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {};
+  ) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {};
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setLoading(true);
+
+    try {
+      await emailjs.sendForm(
+        serviceId,
+        templateId,
+        formRef.current as HTMLFormElement,
+        publicKey
+      );
+
+      alert("Message sent, I'll get back to you soon!");
+      setLoading(false);
+
+      setForm({
+        name: "",
+        email: "",
+        message: "",
+      });
+    } catch (error: any) {
+      console.log(error.text);
+      setLoading(false);
+      alert("Something went wrong, please try again later.");
+    }
+  };
 
   return (
     <div className="xl:mt-12 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden">
